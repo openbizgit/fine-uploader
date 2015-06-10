@@ -60,7 +60,7 @@ you will need to account for these headers in your CORS configuration as well: "
 "x-amz-meta-qqparentuuid", and "x-amz-meta-qqparentsize".
 
 
-### Signing non-chunked upload requests (all browsers)
+## Signing non-chunked upload requests (all browsers)
 The only required server-side task for all browsers is an endpoint that provides a version 2 signature for the policy document.  This endpoint
 corresponds to the `signature.endpoint` property.
 
@@ -111,7 +111,7 @@ the signature request:
 
     { "headers": /* string to sign */ }
 
-The precense of this property indicates to your sever that this is, in fact,
+The presence of this property indicates to your sever that this is, in fact,
 a request to sign a REST/multipart request and not a policy document.
 
 This signature for the headers string differs slightly from the policy document
@@ -123,16 +123,7 @@ should respond with the following in the body of an 'application/json' response:
     { "signature": /* signed headers string */ }
 
 
-## Delete file feature support
-Support for the delete file feature when using the S3 uploader is mostly the same as when using the traditional upload
-mode.  The S3 uploader does add "key" and "bucket" parameters with the request.  Otherwise, the request and the server-side
-code required to handle these requests is the same as when using the traditional uploader.  Fine Uploader expects your
-server-side code to delete the associated file in S3 via Amazon's S3 API, and then return a response to Fine Uploader's
-delete request when this has task has been handled.  See the [server-side documentation for the traditional uploader](../endpoint_handlers/traditional.html)
-for additional information on handling delete file requests.
-
-
-### Supporting IE9 (and older) and Android 2.3.x (and older)
+## Supporting IE9 (and older) and Android 2.3.x (and older)
 For browsers that do not support the File API, Fine Uploader must submit selected files inside of form, targeting a specific
 dynamically-generated iframe.  When the response comes in, Fine Uploader will not be able to determine if the upload was
 successful since the response originated from a domain other than the one hosting the uploader.  To get around this,
@@ -143,7 +134,7 @@ Your `iframeSupport.localBlankPagePath` value must point to a page on your serve
 but it MUST reside on the same origin/domain as the one hosting your upload page.
 
 
-### Optional: Supporting the upload Success POST to your server
+## Optional: Supporting the upload Success POST to your server
 If you would like Fine Uploader to notify your server when any file has been successfully uploaded to S3, you should
 set the `uploadSuccess.endpoint` property.  If this is set, Fine Uploader will send a POST request
 to your server with a Content-Type of "application/x-www-form-urlencoded".  The payload of this request, by default,
@@ -172,6 +163,16 @@ You can also pass any data to your Fine Uploader [`complete` event handler](../a
 by including it in a valid JSON response to the `uploadSuccess.endpoint` POST request.  In fact, the S3 demo server-side
 code on FineUploader.com is passing a signed URL to the `complete` handler which allows you to view the file you've
 uploaded.
+
+
+## Delete file feature support
+Support for the delete file feature when using the S3 uploader is mostly the same as when using the traditional upload
+mode.  The S3 uploader does add "key" and "bucket" parameters with the request.  Otherwise, the request and the server-side
+code required to handle these requests is the same as when using the traditional uploader.  Fine Uploader expects your
+server-side code to delete the associated file in S3 via Amazon's S3 API, and then return a response to Fine Uploader's
+delete request when this has task has been handled.  See the [server-side documentation for the traditional uploader](../endpoint_handlers/traditional.html)
+for additional information on handling delete file requests.
+
 
 ## CORS support
 Support for CORS exists for the requests sent to the `signature.endpoint` `uploadSuccess.endpoint` paths.  You will need
