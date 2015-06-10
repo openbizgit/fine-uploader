@@ -51,7 +51,7 @@ Note that, if resume is also enabled, and this is the first chunk of a resume at
 * `{"success":true, "newUuid": "abc-def-ghi"}` When you would like to override the UUID for this file provided by Fine Uploader.
 
 {{ alert(
-"""You can have additional custom properties in the response, but ensure that you include the "success": true property
+"""You can have additional custom properties in the response, but ensure that you include the 'success': true property
 for a successful response, or it will trigger the onError callback.""", "info", "Note:") }}
 
 
